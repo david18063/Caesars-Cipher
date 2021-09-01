@@ -1,0 +1,60 @@
+# include "utility.h"
+
+bool IsCharUpperCaseLetter(char c)
+{
+    for(char c1='A';c1<='Z';c1++) if(c1 == c) return true;
+
+    return false;
+}
+
+bool IsCharLowerCaseLetter(char c)
+{
+    for(char c1='a';c1<='z';c1++) if(c1 == c) return true;
+
+    return false;
+}
+
+char CodeLetter(char c,int n)
+{
+    int n1 = n;
+    char c1 = c;
+
+    while(n >= 26) n1 -= 26;
+
+    if(IsCharUpperCaseLetter(c1))
+    {
+        while(n1 > 0)
+        {
+            if(c1 < 'Z') {c1++; n1--;}
+            else {c1 = 'A'; n1--;}
+        }
+    }
+
+    if(IsCharLowerCaseLetter(c1))
+    {
+        while(n1 > 0)
+        {
+            if(c1 < 'z') {c1++; n1--;}
+            else {c1 = 'a'; n1--;}
+        }
+    }
+
+    return c1;
+}
+
+string CaesarCipher(string s,int n)
+{
+    string s1 = "";
+
+    for(int i=0;i<s.size();i++) s1 += CodeLetter(s[i],n);
+
+    return s1;
+}
+
+int main()
+{
+    cout<<CaesarCipher("Always-Look-on-the-Bright-Side-of-Life",5)<<endl;
+    cout<<CaesarCipher("A friend in need is a friend indeed",20)<<endl;
+
+    return 0;
+}
